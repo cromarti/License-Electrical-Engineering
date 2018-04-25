@@ -31,3 +31,15 @@ Install and start mongoDB. (http://www.mongodb.org)
 #### 4. Start development
 
 	http://localhost:8080
+
+#### 5. Capture Image
+
+![Alt text](https://github.com/cromarti/License-Electrical-Engineering/blob/master/Image%20Demonstation/1.PNG?raw=true "Optional title")
+
+![Alt text](https://github.com/cromarti/License-Electrical-Engineering/blob/master/Image%20Demonstation/2.PNG?raw=true "Optional title")
+
+![Alt text](https://github.com/cromarti/License-Electrical-Engineering/blob/master/Image%20Demonstation/3.PNG?raw=true "Optional title")
+
+![Alt text](https://github.com/cromarti/License-Electrical-Engineering/blob/master/Image%20Demonstation/4.PNG?raw=true "Optional title")
+
+![Alt text](https://github.com/cromarti/License-Electrical-Engineering/blob/master/Image%20Demonstation/5.PNG?raw=true "Optional title")
