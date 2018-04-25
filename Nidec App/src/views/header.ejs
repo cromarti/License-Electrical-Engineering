@@ -1,0 +1,72 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+        <img id="logo" src="../images/logo.png" height="32" width="102"></a>
+</div>
+<ul class="nav navbar-top-links navbar-right">
+    <!-- /.dropdown -->
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            </li>
+            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#"><i class="fa fa-database fa-fw"></i>Database Status</a>
+              <a class="text-center"><div class="btn-group btn-toggle"> 
+                <button class="btn btn-xs btn-default">ON</button>
+                <button class="btn btn-xs btn-primary active">OFF</button>
+              </div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+        </ul>
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+</ul>
+<!-- /.navbar-top-links -->
+
+<script>
+    $('#start').on('click', function(){
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '/store',  
+                        data: {parametru: '1'}
+                    })   
+    })
+</script>
+
+<script>
+$('.btn-toggle').click(function() {
+    setTimeout(function(){
+        var status = $('.btn-group.btn-toggle .active').html();
+        jQuery.ajax({
+            type: 'POST',
+            url: '/store',  
+            data: {status: status}
+        })
+    }, 100)
+    
+
+    $(this).find('.btn').toggleClass('active');  
+
+    if ($(this).find('.btn-primary').length>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+    }
+
+    $(this).find('.btn').toggleClass('btn-default');
+       
+  });
+</script>

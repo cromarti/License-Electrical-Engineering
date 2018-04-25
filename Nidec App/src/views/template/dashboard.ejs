@@ -1,0 +1,156 @@
+<%layout('../layout')%>
+<div id="page-wrapper">
+    <div class="container col-xs-12">
+        <div class="row">    
+            <h2 class="page-header">Live Chart</h2>    
+            <h4>Press dropdown button</h4>
+            <p>Select the parameter to visualize the graph.</p>
+                <div class=" col-xs-12 panel panel-default">
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Menu 1</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                              <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-plus-title">
+                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
+                                </li>
+                                <li><a href="#" id="graph1">Speed Reference</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Menu 4</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                             <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-plus-title">
+                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
+                                </li>
+                                <li><a href="#" id="graph2">Current Magnitude</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph3">Active Current</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph4">Torque Demand</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph5">Active Current Demand</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph6">Magnetising Current</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph7">Qverriding Current Limit</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph8">Motor Thermal State</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph9">Drive Ixt Level</a></li>                        
+                            </ul>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">Menu 5</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                             <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-plus-title">
+                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
+                                </li>
+                                <li><a href="#" id="graph10">Output Frequency</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph11">Output Voltage</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph12">Output Power</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph13">Motor Speed</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="graph14">DC Bus Voltage</a></li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 chart " > 
+            <video  autoplay muted loop id="myVideo" style="margin: 0 auto; border: 10px double #286090; width: 100%; height:auto min-width: 100%; min-height: 100%; object-fit: cover;">
+              <source src="../video/nidec_background.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+</div>
+<!-- /#page-wrapper -->
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script src="/chart.js/dist/Chart.min.js"></script>
+<script src="/chartjs-plugin-streaming/dist/chartjs-plugin-streaming.min.js"></script>
+<script src="/js/live-chart.js"></script>
+
+<script>
+
+$(document).ready(function(){
+    $('#graph1').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("speed_reference");
+    });
+    $('#graph2').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("current_magnitude");
+    });
+    $('#graph3').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("active_current");
+    });
+    $('#graph4').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("torque_demand");
+    });
+    $('#graph5').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("active_current_demand");
+    });
+    $('#graph6').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("magnetising_current");
+    });
+    $('#graph7').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("qverriding_current_limit");
+    });
+    $('#graph8').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("motor_thermal_state");
+    });
+    $('#graph9').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("drive_ixt_level");
+    });
+    $('#graph10').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("output_frequency");
+    });
+    $('#graph11').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("output_voltage");
+    });
+    $('#graph12').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("output_power");
+    });
+    $('#graph13').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("motor_speed");
+    });
+    $('#graph14').on('click', function(){
+        $(".chart").empty().append('<canvas id="myChart"> </canvas>');
+        live_graph("dc_bus_voltage");
+    });        
+})
+
+
+
+    
+
+</script>

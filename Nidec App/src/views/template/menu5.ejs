@@ -1,0 +1,213 @@
+<%layout('../layout')%>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Menu 5</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div id="exTab1" class="container"> 
+        <ul  class="nav nav-pills">
+            <li class="active" data-id="1" >
+                <a  href="#1a" id="tab1" data-toggle="tab">Output Frequency</a>
+            </li>
+            <li data-id="2" >
+                <a href="#2a" id="tab2" data-toggle="tab">Output Voltage</a>
+            </li>
+            <li data-id="3" >
+                <a href="#3a" id="tab3" data-toggle="tab">Output Power</a>
+            </li>
+            <li data-id="4" >
+                <a href="#4a" id="tab4" data-toggle="tab">Motor Speed</a>
+            </li>
+            <li data-id="5" >
+                <a href="#5a" id="tab5" data-toggle="tab">DC Bus Voltage</a>
+            </li>
+        </ul>
+        
+        <div class="tab-content clearfix">
+          <div class="tab-pane active" id="1a">
+             <div class="row">
+                <canvas id="output_frequency"></canvas>
+             </div>
+          </div>
+          <div class="tab-pane" id="2a">
+             <div class="row">
+                <canvas id="output_voltage"></canvas>
+             </div>
+          </div>
+          <div class="tab-pane" id="3a">
+             <div class="row">
+                <canvas id="output_power"></canvas>
+             </div>
+          </div>
+          <div class="tab-pane" id="4a">
+             <div class="row">
+                <canvas id="motor_speed"></canvas>
+             </div>
+          </div>
+          <div class="tab-pane" id="5a">
+             <div class="row">
+                <canvas id="dc_bus_voltage"></canvas>
+             </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 1em">
+      <div><strong class='col-md-1 col-md-offset-1'>Start Date:</strong></div>
+        <div class='col-md-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' class="form-control" id="date1" placeholder="DD/MM/YYYY hh:mm"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+      <div><strong class='col-md-1 col-md-offset-1'>End Date:</strong></div>
+        <div class='col-md-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker7'>
+                    <input type='text' class="form-control" id="date2" placeholder="DD/MM/YYYY hh:mm"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button  type="button" class="btn btn-primary" id="apply">Apply</button>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->
+<script src="/chart.js/dist/Chart.min.js"></script>
+<script src="/js/flot-data.js"></script>
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({
+            format : 'DD/MM/YYYY HH:mm' });
+        $('#datetimepicker7').datetimepicker({
+            format : 'DD/MM/YYYY HH:mm',
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+<script>
+let time = <%- JSON.stringify(time) %>;
+
+var data = [
+    {
+        xAxeValue: time,
+        yAxeValue: [<%=output_frequency%>],
+        canvasID: 'output_frequency'    ,
+        xAxeName: 'Time',
+        yAxeName: 'Output Frequency'
+    },
+    {
+        xAxeValue: time,
+        yAxeValue: [<%=output_voltage%>],
+        canvasID: 'output_voltage'    ,
+        xAxeName: 'Time',
+        yAxeName: 'Output Voltage'
+    },
+    {
+        xAxeValue: time,
+        yAxeValue: [<%=output_power%>],
+        canvasID: 'output_power'    ,
+        xAxeName: 'Time',
+        yAxeName: 'Output Power'
+    },
+    {
+        xAxeValue: time,
+        yAxeValue: [<%=motor_speed%>],
+        canvasID: 'motor_speed'    ,
+        xAxeName: 'Time',
+        yAxeName: 'Motor Speed'
+    },
+    {
+        xAxeValue: time,
+        yAxeValue: [<%=dc_bus_voltage%>],
+        canvasID: 'dc_bus_voltage'  ,
+        xAxeName: 'Time',
+        yAxeName: 'DC Bus Voltage'
+    },
+];
+
+var charts = [];
+window.onload = function() {
+   charts[0] = graph(data[0]);
+};
+$('#tab1').click(function(){
+  setTimeout(() => {
+   $("#1a .row").empty().append('<canvas id="output_frequency"> </canvas>');
+   charts[0] = graph(data[0]);
+  },100);  
+})
+$('#tab2').click(function(){
+  setTimeout(() => {
+   $("#2a .row").empty().append('<canvas id="output_voltage"> </canvas>');
+   charts[1] = graph(data[1]);
+  },100);
+})
+$('#tab3').click(function(){
+  setTimeout(() => {
+    $("#3a .row").empty().append('<canvas id="output_power"> </canvas>');
+    charts[2] = graph(data[2]);
+  },100);
+})
+$('#tab4').click(function(){
+  setTimeout(() => {
+   $("#4a .row").empty().append('<canvas id="motor_speed"> </canvas>');
+   charts[3] = graph(data[3]);
+  },100);
+})
+$('#tab5').click(function(){
+  setTimeout(() => {
+    $("#5a .row").empty().append('<canvas id="dc_bus_voltage"> </canvas>');
+    charts[4] = graph(data[4]);
+  },100);  
+
+})
+
+$('#apply').on('click', function(){
+      let activeTab = $('.nav-pills .active').attr('data-id');
+      activeTab = activeTab - 1;
+      let input1 = $('#date1').val();
+      let input2 = $('#date2').val();
+      let data1 = moment(input1, "DD/MM/YYYY HH:mm");
+      let data2 = moment(input2, "DD/MM/YYYY HH:mm");
+      let newData = Object.assign({}, data[activeTab]);
+      newData.xAxeValue = [];
+      newData.yAxeValue = [];
+      result = data[activeTab].xAxeValue.map(function(value, index){
+        var yAxeValue = data[activeTab].yAxeValue[index];
+        var xAxeValue = value;
+        var currentDate = moment(value, "DD/MM/YYYY HH:mm");
+        if (currentDate.isAfter(data1) && currentDate.isBefore(data2)){
+          newData.xAxeValue.push(value);
+          newData.yAxeValue.push(yAxeValue);
+        }
+      });
+      setTimeout(() => {
+
+        charts[activeTab].data.labels = newData.xAxeValue;
+        charts[activeTab].data.datasets[0].data = newData.yAxeValue;
+        charts[activeTab].update();
+    }, 500);
+      
+   })
+</script>
