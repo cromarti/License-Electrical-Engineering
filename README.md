@@ -24,7 +24,7 @@ Install and start mongoDB. (http://www.mongodb.org)
 	$ cd Nidec App
 	$ npm install
 
-#### 3. Start SB Admin 2 Node.js
+#### 3. Start App
 
 	$ npm run dev
 
