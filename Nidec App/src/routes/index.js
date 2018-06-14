@@ -41,13 +41,7 @@ module.exports = function(app, passport){
   	app.get('/table_menu4', menu4_tableController.index);
   	app.get('/table_menu5', menu5_tableController.index);
 
- 
-
-
-	/*app.get('/tables', function(req, res) {
-	   res.render('template/tables', {});
-	});*/
-
+  	
 
 }
 

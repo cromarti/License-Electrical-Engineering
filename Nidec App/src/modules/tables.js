@@ -22,23 +22,3 @@ const index = (req, res) => {
 module.exports.index = index;
 
 
-// import Parametri_Model from './../models/parametri';
-// import moment from 'moment'
-
-// const index = (req, res) => {
-//             return Parametri_Model.find().exec().then(results => {
-
-//             let obj = results.map(function (elem) {
-//                 elem.created = moment(elem.created).format('DD/MM/YYYY');
-//                 return elem;
-//             });
-
-//    			console.log(results);
-
-//             res.setHeader('Content-Type', 'application/json');
-//             res.send(obj);
-//         });
-// }
-
-// module.exports.index = index;
-
