@@ -78,8 +78,6 @@ let config = {
     }
     }
 };
-
-
         config.data.labels = data.xAxeValue.slice(-200);
         config.data.datasets[0].data = data.yAxeValue.slice(-200);
         config.options.scales.xAxes[0].scaleLabel.labelString = data.xAxeName;

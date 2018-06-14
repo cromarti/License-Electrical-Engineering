@@ -19,11 +19,9 @@ const ParametriSchema = new mongoose.Schema({
     output_power: Number,
     motor_speed: Number,
     dc_bus_voltage: Number,
-//-------- Menu 10------//  
-    // last_trip: Number,
-    // trip_2: Number,  
-
 	created: { type: Date, default: Date.now }
 },{'collection': 'parametri'});
 
 module.exports = mongoConn.model('parametri', ParametriSchema);
+
+
