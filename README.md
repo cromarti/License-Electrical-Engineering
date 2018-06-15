@@ -1,4 +1,4 @@
-# Developing a Web Application to Record the Parameters of a Frequency Transformer
+# Developing a Web Application to Record the Parameters of a Frequency Converter
 
     Bootstrap  + Node.js + mongoDB
 
