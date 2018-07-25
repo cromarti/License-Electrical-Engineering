@@ -40,6 +40,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td ><button  type="button" class="btn btn-primary center-block" id="apply">Apply</button></td>
                                                 </tr>
                                               </tbody>
                                           </table>
@@ -139,19 +140,11 @@ $(document).ready(function(){
             return false;
         }
         );
-            $("#min").on("dp.change", function (e) {
-                table.draw();
-            });
-            $("#max").on("dp.change", function (e) {
-                table.draw();
-            });
-       
-            // $("#min").datetimepicker({ onSelect: function () { table.draw(); },changeMonth: true, changeYear: true });
-            // $("#max").datetimepicker({ onSelect: function () { table.draw(); },changeMonth: true, changeYear: true });
-            
 
-            // Event listener to the two range filtering inputs to redraw on input
-            // $('#min, #max').change(function () { table.draw(); });
+            $("#apply").click(function (e) {
+                table.draw();
+            })  ;
+
 });
 
     </script>

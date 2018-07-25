@@ -40,6 +40,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td><button  type="button" class="btn btn-primary center-block" id="apply">Apply</button></td>
                                                 </tr>
                                               </tbody>
                                           </table>
@@ -71,23 +72,26 @@
              </div>
 </div>
 <!-- /#page-wrapper -->
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <link  href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="bower_components/datatables/media/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="bower_components/datatables.net-buttons-dt/css/buttons.dataTables.min.css">
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<link  href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="bower_components/datatables/media/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="bower_components/datatables.net-buttons-dt/css/buttons.dataTables.min.css">
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
 
-    <script type="text/javascript" src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="bower_components/jszip/dist/jszip.min.js"></script>
-    <script type="text/javascript" src="bower_components/pdfmake/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="bower_components/pdfmake/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 
-    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-    <!-- <script src="/js/table_pagination.js"></script> -->
+<script type="text/javascript" src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="bower_components/jszip/dist/jszip.min.js"></script>
+<script type="text/javascript" src="bower_components/pdfmake/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="bower_components/pdfmake/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+
+
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
 
     <script> 
       $(document).ready(function(){
@@ -122,30 +126,37 @@
                                              
                                           ]
                                    } );
-
-              $.fn.dataTable.ext.search.push(
+          $.fn.dataTable.ext.search.push(
               function (settings, data, dataIndex) {
-                  var min = $('#min').datepicker("getDate");
-                  var max = $('#max').datepicker("getDate");
-                  var evalDate = moment(data[0],"DD/MM/YYYY HH:mm").format('MM/DD/YYYY');
-                  var evalDate = new Date(evalDate);
+
+                  $(function () {
+                      $('#min').datetimepicker({
+                          format : 'DD/MM/YYYY HH:mm' ,
+                          useCurrent: false});
+                      $('#max').datetimepicker({
+                          format : 'DD/MM/YYYY HH:mm',
+                          useCurrent: false //Important! See issue #1075
+                      });
+                  });
+
+
+                  var min = null;
+                  var max = null;
+                  if($('#min').val()!=""){ min = moment($('#min').val(),"DD/MM/YYYY HH:mm").format("x")};
+                  if($('#max').val()!=""){ max = moment($('#max').val(),"DD/MM/YYYY HH:mm").format("x")};
+                  var evalDate =  moment(data[0],"DD/MM/YYYY HH:mm").format("x");
                   if (min == null && max == null) { return true; }
                   if (min == null && evalDate <= max) { return true;}
                   if(max == null && evalDate >= min) {return true;}
                   if (evalDate <= max && evalDate >= min) { return true; }
                   return false;
               }
-              );
+          );
 
-             
-                  $("#min").datepicker({ onSelect: function () { table.draw(); },dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true });
-                  $("#max").datepicker({ onSelect: function () { table.draw(); },dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true });
-                  
+          $("#apply").click(function (e) {
+              table.draw();
+          })  ;
 
-                  // Event listener to the two range filtering inputs to redraw on input
-                  $('#min, #max').change(function () {
-                      table.draw();
-                  });
       });
 
     </script>
